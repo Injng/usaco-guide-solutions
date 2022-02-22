@@ -11,7 +11,7 @@ int main() {
   int total1 = v1 * s + 2 * t1;
   int total2 = v2 * s + 2 * t2;
 
-  if (total1 == total2) cout << "Friendship";
-  else if (total1 >= total2) cout << "First";
-  else cout << "Second";
+  if (total1 == total2) cout << "Friendship\n";
+  else if (total1 >= total2) cout << "Second\n";
+  else cout << "First\n";
 }
