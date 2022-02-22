@@ -1,0 +1,38 @@
+#include <iostream>
+#include <cstdio>
+using namespace std;
+
+int main() {
+  freopen("billboard.in", "r", stdin);
+  freopen("billboard.out", "w", stdout);
+  int a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4;
+  cin >> a1 >> a2 >> a3 >> a4;
+  cin >> b1 >> b2 >> b3 >> b4;
+  cin >> c1 >> c2 >> c3 >> c4;
+  int area;
+  if (max(a3, b3) == a3) {
+    if (a3 > c1 && a4 > c2) {
+      area = area + (a4 - c2) * (a3 - c1);
+    } else {
+      area = area;
+    }
+    if (b3 < c3 && b4 < c4) {
+      area = area + (c3 - b3) * (c4 - b4);
+    } else {
+      area = area;
+    }
+  } else {
+    if (b3 > c1 && b4 > c2) {
+      area = area + (b4 - c2) * (b3 - c1);
+    } else {
+      area = area;
+    }
+    if (a3 < c3 && a4 < c4) {
+      area = area + (c3 - a3) * (c4 - a4);
+    } else {
+      area = area;
+    }
+  }
+  cout << area;
+}
+      
