@@ -13,6 +13,7 @@ int coordinates(int x, int y, char move, int det) {
 
   if (det == 0 || det == -1) return x;
   else if (det == 1 || det == -2) return y;
+  else return 0;
 }
   
 int main() {
