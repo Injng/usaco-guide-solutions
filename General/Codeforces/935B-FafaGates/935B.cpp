@@ -22,7 +22,8 @@ int main() {
 
   int n;
   string moves;
-  int x, y = 0;
+  int x = 0;
+  int y = 0;
   int coins = 0;
 
   cin >> n >> moves;
