@@ -13,6 +13,7 @@ int coordinates(int x, int y, char move, int det) {
 
   if (det == 0 || det == -1) return x;
   else if (det == 1 || det == -2) return y;
+  else return 0;
 }
   
 int main() {
@@ -21,19 +22,19 @@ int main() {
 
   int n;
   string moves;
-  int x, y = 0;
+  int x = 0;
+  int y = 0;
   int coins = 0;
+  int prevkingdom;
+  int currkingdom;
+  int nextx;
+  int nexty;
+  int prevx;
+  int prevy;
 
   cin >> n >> moves;
 
   for (int i = 0; i < n; ++i) {
-    int prevkingdom;
-    int currkingdom;
-    int nextx;
-    int nexty;
-    int prevx;
-    int prevy;
-
     if (i == 0) {
       prevkingdom = 0;
     } else {
