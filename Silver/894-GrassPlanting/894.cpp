@@ -23,3 +23,4 @@ int main() {
 
   cout << *max_element(sums, sums+n) + 1 << "\n";
 }
+
