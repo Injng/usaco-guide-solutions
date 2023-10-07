@@ -9,47 +9,51 @@ int main() {
 
   int n, m, q;
   cin >> n >> m >> q;
-  // 建立数组给存储输入信息和前缀和
-  int grid[n + 1][m + 1];
-  int squares[n + 1][m + 1];
-  int rows[n + 1][m + 1];
-  int cols[n + 1][m + 1];
+  int inpt[n+1][m+1];
+  int blus[n+1][m+1];
+  fill(&blus[0][0], &blus[0][0] + sizeof(blus), 0);
+  int rows[n+1][m+1];
+  fill(&rows[0][0], &rows[0][0] + sizeof(rows), 0);
+  int cols[n+1][m+1];
+  fill(&cols[0][0], &cols[0][0] + sizeof(cols), 0);
 
-  // 读输入信息
   for (int i = 0; i < n + 1; i++) {
-    string row = "";
+    string row;
     if (i != 0) {
       cin >> row;
+    } else {
+      row = "";
     }
+
     for (int j = 0; j < m + 1; j++) {
-      if (j == 0 || i == 0) {
-        grid[i][j] = 0;
-        squares[i][j] = 0;
-        rows[i][j] = 0;
-        cols[i][j] = 0;
+      if (i == 0 || j == 0) {
+        inpt[i][j] = 0;
         continue;
       } else {
-        grid[i][j] = 0;
-        squares[i][j] = squares[i - 1][j] + squares[i][j - 1] - squares[i - 1][j - 1];
-        rows[i][j] = rows[i - 1][j] + rows[i][j - 1] - rows[i - 1][j - 1];
-        cols[i][j] = cols[i - 1][j] + cols[i][j - 1] - cols[i - 1][j - 1];
-        if (row[j - 1] == '1') {
-          grid[i][j] = 1;
-          squares[i][j]++;
-          rows[i][j] += (grid[i][j - 1] == 1);
-          cols[i][j] += (grid[i - 1][j] == 1);
-        }
+        inpt[i][j] = row[j - 1] - '0';
       }
     }
   }
-  
-  // 操作查询
+
+  for (int i = 0; i < n + 1; i++) {
+    for (int j = 0; j < m + 1; j++) {
+      if (i && j) {
+        blus[i][j] = inpt[i][j];
+        blus[i][j] += blus[i - 1][j] + blus[i][j - 1] - blus[i - 1][j - 1];
+        rows[i][j] += rows[i - 1][j] + rows[i][j - 1] - rows[i - 1][j - 1];
+        rows[i][j] += (inpt[i][j] && inpt[i][j - 1]) ? 1 : 0;
+        cols[i][j] += cols[i - 1][j] + cols[i][j - 1] - cols[i - 1][j - 1];
+        cols[i][j] += (inpt[i][j] && inpt[i - 1][j]) ? 1 : 0;
+      }
+    }
+  }
+
   for (int i = 0; i < q; i++) {
     int x1, y1, x2, y2;
     cin >> x1 >> y1 >> x2 >> y2;
-    int square = squares[x2][y2] - squares[x2][y1 - 1] - squares[x1][y2 - 1] + squares[x1 - 1][y1 - 1];
-    int row = rows[x2][y2] - rows[x2][y1 - 1] - rows[x1][y2 - 1] + rows[x1 - 1][y1 - 1];
-    int col = cols[x2][y2] - cols[x2][y1 - 1] - cols[x1][y2 - 1] + cols[x1 - 1][y1 - 1];
-    cout << square - row - col << "\n";
+    int squares = blus[x2][y2] - blus[x2][y1 - 1] - blus[x1 - 1][y2] + blus[x1 - 1][y1 - 1];
+    int crows = rows[x2][y2] - rows[x2][y1] - rows[x1 - 1][y2] + rows[x1 - 1][y1];
+    int ccols = cols[x2][y2] - cols[x2][y1 - 1] - cols[x1][y2] + cols[x1][y1 - 1];
+    cout << squares - crows - ccols << "\n";
   }
 }

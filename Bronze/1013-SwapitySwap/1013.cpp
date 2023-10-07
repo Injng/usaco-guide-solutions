@@ -21,6 +21,7 @@ void swapity(int sequence[], int a, int b) {
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+
   freopen("swap.in", "r", stdin);
   freopen("swap.out", "w", stdout);
 
