@@ -54,6 +54,9 @@ int main() {
         dfs(i);
         max = max < cow_count ? cow_count : max;
         cow_count = 0;
+        for (int j = 0; j < n; j++) {
+            is_visited[j] = false;
+        }
     }
 
     cout << max << "\n";
